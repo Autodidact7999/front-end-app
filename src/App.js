@@ -1,30 +1,34 @@
-// src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { getAll, post, put, deleteById } from './memdb.js';
 
 const App = () => {
   const blankCustomer = { id: -1, name: '', email: '', password: '' };
-  const [customers, setCustomers] = useState([
-    { id: 1, name: 'Mike Johnsons', email: 'mikej@abc.com', password: 'mikej' },
-    { id: 2, name: 'Cindy Smiths', email: 'cinds@abc.com', password: 'cinds' },
-    { id: 3, name: 'Julio Martins', email: 'julim@abc.com', password: 'julim' }
-  ]);
+  const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(blankCustomer);
+
+  useEffect(() => {
+    const customers = getAll();
+    setCustomers(customers);
+  }, []);
 
   const handleButtonClick = (action) => {
     console.log(`in on${action}Click()`);
     if (action === 'Delete') {
       if (selectedCustomer.id !== -1) {
-        setCustomers(customers.filter(customer => customer.id !== selectedCustomer.id));
+        deleteById(selectedCustomer.id);
+        const customers = getAll();
+        setCustomers(customers);
         setSelectedCustomer(blankCustomer);
       }
     } else if (action === 'Save') {
       if (selectedCustomer.id === -1) {
-        const newCustomer = { ...selectedCustomer, id: customers.length + 1 };
-        setCustomers([...customers, newCustomer]);
+        post(selectedCustomer);
       } else {
-        setCustomers(customers.map(customer => (customer.id === selectedCustomer.id ? selectedCustomer : customer)));
+        put(selectedCustomer.id, selectedCustomer);
       }
+      const customers = getAll();
+      setCustomers(customers);
       setSelectedCustomer(blankCustomer);
     } else if (action === 'Cancel') {
       setSelectedCustomer(blankCustomer);
@@ -88,15 +92,14 @@ const App = () => {
                 <td><input type="password" name="password" value={selectedCustomer.password} onChange={handleInputChange} placeholder="password" /></td>
               </tr>
               <tr>
-              <td colSpan="2">
-            <button type="button" onClick={() => handleButtonClick('Delete')}>Delete</button>
-            <button type="button" onClick={() => handleButtonClick('Save')}>Save</button>
-            <button type="button" onClick={() => handleButtonClick('Cancel')}>Cancel</button>
-            </td>
+                <td colSpan="2">
+                  <button type="button" onClick={() => handleButtonClick('Delete')}>Delete</button>
+                  <button type="button" onClick={() => handleButtonClick('Save')}>Save</button>
+                  <button type="button" onClick={() => handleButtonClick('Cancel')}>Cancel</button>
+                </td>
               </tr>
             </tbody>
           </table>
-          
         </form>
       </div>
     </div>
