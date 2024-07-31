@@ -1,17 +1,22 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CustomerList from './components/CustomerList';
 import CustomerAddUpdateForm from './components/CustomerAddUpdateForm';
-import { getAll, post, put, deleteById } from './memdb';
+import { getAll, post, put, deleteById } from './restdb';
 
 const App = () => {
   const blankCustomer = { id: -1, name: '', email: '', password: '' };
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(blankCustomer);
 
+  const getCustomers = () => {
+    console.log('in getCustomers()');
+    getAll(setCustomers);
+  };
+
   useEffect(() => {
-    const customers = getAll();
-    setCustomers(customers);
+    getCustomers();
   }, []);
 
   const handleCustomerSelect = (customer) => {
@@ -24,23 +29,16 @@ const App = () => {
 
   const handleSave = () => {
     if (selectedCustomer.id === -1) {
-      post(selectedCustomer);
-      const customers = getAll();
-      setCustomers(customers);
-      setSelectedCustomer(blankCustomer);
+      post(selectedCustomer, getCustomers);
     } else {
-      put(selectedCustomer.id, selectedCustomer);
-      const customers = getAll();
-      setCustomers(customers);
-      setSelectedCustomer(blankCustomer);
+      put(selectedCustomer.id, selectedCustomer, getCustomers);
     }
+    setSelectedCustomer(blankCustomer);
   };
 
   const handleDelete = () => {
     if (selectedCustomer.id !== -1) {
-      deleteById(selectedCustomer.id);
-      const customers = getAll();
-      setCustomers(customers);
+      deleteById(selectedCustomer.id, getCustomers);
       setSelectedCustomer(blankCustomer);
     }
   };

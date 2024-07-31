@@ -1,0 +1,28 @@
+{
+  "customers": [
+    {
+      "id": 0,
+      "name": "Mary Jackson",
+      "email": "maryj@abc.com",
+      "password": "maryjaaa"
+    },
+    {
+      "id": 1,
+      "name": "Harsh",
+      "email": "hn@adp.com",
+      "password": "sasabcd"
+    },
+    {
+      "id": 2,
+      "name": "safa",
+      "email": "asafa",
+      "password": "afa"
+    },
+    {
+      "id": 3,
+      "name": "wer",
+      "email": "wef",
+      "password": "werfw"
+    }
+  ]
+}
