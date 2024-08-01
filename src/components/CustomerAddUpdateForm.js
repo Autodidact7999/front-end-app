@@ -1,4 +1,8 @@
+// src/components/CustomerAddUpdateForm.js
 import React from 'react';
+import {
+  TextField, Button, Grid, Paper, Typography
+} from '@mui/material';
 
 const CustomerAddUpdateForm = ({ formTitle, customer, onInputChange, onSave, onDelete, onCancel }) => {
   const handleInputChange = (e) => {
@@ -17,34 +21,52 @@ const CustomerAddUpdateForm = ({ formTitle, customer, onInputChange, onSave, onD
   };
 
   return (
-    <div className="form-container">
-      <h2>{formTitle}</h2>
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <td><label>Name:</label></td>
-              <td><input type="text" name="name" value={customer.name} onChange={handleInputChange} placeholder="Customer Name" /></td>
-            </tr>
-            <tr>
-              <td><label>Email:</label></td>
-              <td><input type="email" name="email" value={customer.email} onChange={handleInputChange} placeholder="name@company.com" /></td>
-            </tr>
-            <tr>
-              <td><label>Pass:</label></td>
-              <td><input type="password" name="password" value={customer.password} onChange={handleInputChange} placeholder="password" /></td>
-            </tr>
-            <tr>
-              <td colSpan="2">
-                <button type="button" onClick={() => handleButtonClick('Delete')}>Delete</button>
-                <button type="button" onClick={() => handleButtonClick('Save')}>Save</button>
-                <button type="button" onClick={() => handleButtonClick('Cancel')}>Cancel</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
+    <Paper style={{ padding: '20px', marginTop: '20px' }}>
+      <Typography variant="h6" component="div" style={{ paddingBottom: '10px' }}>
+        {formTitle}
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Name"
+            name="name"
+            value={customer.name}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            value={customer.email}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Password"
+            name="password"
+            type="password"
+            value={customer.password}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button variant="contained" color="secondary" onClick={() => handleButtonClick('Delete')}>
+            Delete
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => handleButtonClick('Save')}>
+            Save
+          </Button>
+          <Button variant="contained" onClick={() => handleButtonClick('Cancel')}>
+            Cancel
+          </Button>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

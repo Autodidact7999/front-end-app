@@ -1,28 +1,28 @@
 {
   "customers": [
     {
-      "id": 0,
-      "name": "Mary Jackson",
-      "email": "maryj@abc.com",
-      "password": "maryjaaa"
-    },
-    {
       "id": 1,
-      "name": "Harsh",
-      "email": "hn@adp.com",
-      "password": "sasabcd"
+      "name": "Shiva",
+      "email": "shiva@adp.com",
+      "password": "abcd"
     },
     {
       "id": 2,
-      "name": "safa",
-      "email": "asafa",
-      "password": "afa"
+      "name": "Hem",
+      "email": "hem@adp.com",
+      "password": "abcd"
     },
     {
       "id": 3,
-      "name": "wer",
-      "email": "wef",
-      "password": "werfw"
+      "name": "Mark",
+      "email": "mark@adp.com",
+      "password": "abcd"
+    },
+    {
+      "id": 4,
+      "name": "Harsh",
+      "email": "harsh@adp.com",
+      "password": "abcd"
     }
   ]
 }
